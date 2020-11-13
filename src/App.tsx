@@ -57,7 +57,16 @@ function App() {
     }
   };
 
-  const newQuestion = () => {};
+  const newQuestion = () => {
+    // Move on to the next question
+    const nextQuestion = number + 1;
+
+    if (nextQuestion === TOTAL_QUESTIONS) {
+      setGameOver(true);
+    } else {
+      setNumber(nextQuestion);
+    }
+  };
 
   return (
     <div className="App">
@@ -82,7 +91,7 @@ function App() {
       {!gameOver &&
       !loading &&
       userAnswers.length === number + 1 &&
-      number !== TOTAL_QUESTIONS ? (
+      number !== TOTAL_QUESTIONS - 1 ? (
         <button className="next" onClick={newQuestion}>
           Next Question
         </button>
