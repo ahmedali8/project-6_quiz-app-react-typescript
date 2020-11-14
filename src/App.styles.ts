@@ -1,5 +1,4 @@
 import styled, { createGlobalStyle } from 'styled-components';
-import BGImage from './images/nattu-adnan-unsplash.jpg';
 
 export const GlobalStyle = createGlobalStyle`
   html {
@@ -7,14 +6,14 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    background-image: url(${BGImage});
-    background-size: cover;
+    background: linear-gradient(90deg, #141E30, #243B55);
     margin: 0;
     padding: 0 20px;
   }
 
   * {
-    font-family: 'Catamaran', sans-serif;
+    font-family: 'Lato', sans-serif;
+    font-size: 18px;
     box-sizing: border-box;
   }
 `;
@@ -25,39 +24,55 @@ export const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
 
+  .loader {
+    width: 50px;
+    margin: 10px 0;
+  }
+
   h1 {
-    font-family: Fascinate Inline;
-    background-image: linear-gradient(180deg, #fff, #87f1ff);
     font-weight: 400;
-    background-size: 100%;
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    -moz-background-clip: text;
-    -moz-text-fill-color: transparent;
     filter: drop-shadow(2px 2px #0085a3);
-    font-size: 70px;
+    font-size: 60px;
     text-align: center;
-    margin: 20px;
+    color: #fff;
+    margin: 15px;
   }
 
   .start,
   .next {
     cursor: pointer;
-    background: linear-gradient(180deg, #ffffff, #ffcc91);
-    border: 2px solid #d38558;
+    color: #fff;
+    background: linear-gradient(180deg, #141e30, #243b55);
+    border: 2px solid #fff;
     box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.25);
-    border-radius: 10px;
+    border-radius: 5px;
     height: 40px;
     margin: 20px 0;
     padding: 0 40px;
+    transition: all 0.2s ease;
   }
 
   .start {
     max-width: 200px;
   }
 
+  .start:hover,
+  .start:focus,
+  .next:hover,
+  .next:focus {
+    color: #141e30;
+    background: #fff;
+  }
+
   .score {
     color: #fff;
+    font-weight: 700;
+  }
+
+  @media only screen and (max-width: 720px) {
+    h1 {
+      font-size: 25px;
+      margin: 10px;
+    }
   }
 `;
