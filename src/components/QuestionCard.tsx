@@ -24,9 +24,9 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
 }) => {
   return (
     <Wrapper>
-      <p className="number">
+      <h3 className="number">
         Question: {questionNr} / {totalQuestions}
-      </p>
+      </h3>
       <p dangerouslySetInnerHTML={{ __html: question }} />
       <div>
         {answers.map((answer, index) => (
