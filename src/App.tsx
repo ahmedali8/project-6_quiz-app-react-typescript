@@ -2,10 +2,13 @@ import React, { useState } from 'react';
 import { fetchQuizQuestions } from './API';
 // Components
 import QuestionCard from './components/QuestionCard';
+import UserAnswers from './components/UserAnswers';
 // Types
 import { QuestionState, Difficulty } from './API';
 // Styles
 import { GlobalStyle, Wrapper } from './App.styles';
+
+import loader from './images/loading.gif';
 
 export type AnswerObject = {
   question: string;
@@ -74,15 +77,12 @@ function App() {
     <>
       <GlobalStyle />
       <Wrapper>
-        <h1>REACT QUIZ</h1>
-        {gameOver || userAnswers.length === TOTAL_QUESTIONS ? (
-          <button className="start" onClick={startTrivia}>
-            Start
-          </button>
-        ) : null}
+        <h1>TYPESCRIPT QUIZ APP</h1>
         {!gameOver ? <p className="score">Score: {score}</p> : null}
-        {loading && <p>Loading Questions...</p>}
-        {!loading && !gameOver && (
+
+        {loading && <img className="loader" src={loader} alt="loader" />}
+
+        {!loading && !gameOver && userAnswers.length !== TOTAL_QUESTIONS && (
           <QuestionCard
             questionNr={number + 1}
             totalQuestions={TOTAL_QUESTIONS}
@@ -92,12 +92,31 @@ function App() {
             callback={checkAnswer}
           />
         )}
+
+        {(!loading && gameOver) ||
+          (userAnswers.length === TOTAL_QUESTIONS &&
+            userAnswers.map((userAnswer, index) => (
+              <UserAnswers
+                key={index}
+                question={userAnswer.question}
+                answer={userAnswer.answer}
+                correct={userAnswer.correct}
+                correctAnswer={userAnswer.correctAnswer}
+              />
+            )))}
+
+        {gameOver || userAnswers.length === TOTAL_QUESTIONS ? (
+          <button className="start" onClick={startTrivia}>
+            {userAnswers.length ? 'START AGAIN' : 'START'}
+          </button>
+        ) : null}
+
         {!gameOver &&
         !loading &&
         userAnswers.length === number + 1 &&
         number !== TOTAL_QUESTIONS - 1 ? (
           <button className="next" onClick={newQuestion}>
-            Next Question
+            NEX QUESTION
           </button>
         ) : null}
       </Wrapper>
